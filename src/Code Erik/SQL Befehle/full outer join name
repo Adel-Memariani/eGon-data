@@ -1,0 +1,2 @@
+﻿SELECT  industry."Energies_D5_1_Industry_Dataset"."companynam"  , industry."hotmaps_Industrial_Database"."SiteName"  
+     from industry."Energies_D5_1_Industry_Dataset"  FULL OUTER JOIN  industry."hotmaps_Industrial_Database"  ON (industry."Energies_D5_1_Industry_Dataset"."companynam" = industry."hotmaps_Industrial_Database"."SiteName");

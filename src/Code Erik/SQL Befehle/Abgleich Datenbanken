@@ -1,0 +1,2 @@
+﻿SELECT industry."DB1"."Name"  , industry."DB2"."Name"  
+    FROM  industry."DB1"  FULL OUTER JOIN  industry."DB2"  ON (industry."DB1"."Name" = industry."DB2"."Name");
