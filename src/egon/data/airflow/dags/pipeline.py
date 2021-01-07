@@ -5,6 +5,7 @@ import airflow
 import os
 
 from egon.data.airflow.tasks import initdb
+from egon.data.airflow.tasks_test import initdb_local
 from egon.data.db import airflow_db_connection
 import egon.data.importing.openstreetmap as import_osm
 import egon.data.importing.vg250 as import_vg250
@@ -26,6 +27,9 @@ with airflow.DAG(
     schedule_interval=None,
 ) as pipeline:
     setup = PythonOperator(task_id="initdb", python_callable=initdb)
+   test_DLR = PythonOperator(task_id="initdb_local", python_callable=initdb_local)
+
+    setup.set_downstream(test_DLR)
 
     # Openstreetmap data import
     osm_download = PythonOperator(
