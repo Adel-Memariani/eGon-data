@@ -13,7 +13,9 @@ import egon.data.processing.openstreetmap as process_osm
 
 
 # Prepare connection to db for operators
+print("print_test_0")
 airflow_db_connection()
+print("print_test_1")
 
 with airflow.DAG(
     "egon-data-processing-pipeline",
@@ -25,11 +27,15 @@ with airflow.DAG(
     ],
     is_paused_upon_creation=False,
     schedule_interval=None,
+    
 ) as pipeline:
-    setup = PythonOperator(task_id="initdb", python_callable=initdb)
-   test_DLR = PythonOperator(task_id="initdb_local", python_callable=initdb_local)
-
-    setup.set_downstream(test_DLR)
+#    setup = PythonOperator(task_id="initdb", python_callable=initdb)
+    setup = PythonOperator(task_id="initdb_local", python_callable=initdb_local)
+ 
+    #   test_DLR = PythonOperator(task_id="initdb_local", python_callable=initdb_local)
+ 
+   # setup.set_downstream(test_DLR)
+    
 
     # Openstreetmap data import
     osm_download = PythonOperator(
