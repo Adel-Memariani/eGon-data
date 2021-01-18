@@ -11,7 +11,7 @@ from locale import getpreferredencoding
 from textwrap import indent, wrap
 import itertools
 import subprocess
-
+import sys
 
 class CalledProcessError(subprocess.CalledProcessError):
     """A more verbose version of :py:class:`subprocess.CalledProcessError`.
@@ -55,6 +55,10 @@ def run(*args, **kwargs):
     """
     kwargs["check"] = kwargs.get("check", True)
     kwargs["capture_output"] = kwargs.get("capture_output", True)
+
+    if sys.version < '3.7':
+    	del kwargs["capture_output"]
+
     try:
         subprocess.run(*args, **kwargs)
     except subprocess.CalledProcessError as cpe:
